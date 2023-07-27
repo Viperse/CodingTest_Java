@@ -7,10 +7,7 @@ class Solution {
         	sumPrice += price * i;
         }        
         
-        if(money >= sumPrice) {
-        	return answer = 0;
-        } else {
-        	return answer = sumPrice - money;
-        }
+        if(money >= sumPrice) return answer = 0; 
+        else return answer = sumPrice - money;
     }
 }
