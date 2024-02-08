@@ -1,0 +1,10 @@
+SELECT M.MEMBER_NAME, R.REVIEW_TEXT, TO_CHAR(R.REVIEW_DATE, 'YYYY-MM-DD') REVIEW_DATE
+  FROM REST_REVIEW R
+  JOIN MEMBER_PROFILE M ON (M.MEMBER_ID = R.MEMBER_ID)
+ WHERE M.MEMBER_ID IN (SELECT MEMBER_ID
+                        FROM REST_REVIEW
+                       GROUP BY MEMBER_ID
+                      HAVING COUNT(MEMBER_ID) = (SELECT MAX(COUNT(MEMBER_ID))
+                                                   FROM REST_REVIEW
+                                                  GROUP BY MEMBER_ID))
+ ORDER BY REVIEW_DATE, R.REVIEW_TEXT
